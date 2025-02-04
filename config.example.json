@@ -1,0 +1,17 @@
+{
+    "badWords": [
+        "badwords1",
+        "badwords2",
+        "badwords3"
+    ],
+    "blockedWregex": [
+        "blockwords1",
+        "blockwords1",
+        "blockwords1"
+    ],
+    "blockedChannelsWregex": [
+        "channel1",
+        "channel2",
+        "channel3"
+    ]
+}
