@@ -69,7 +69,6 @@ client.on('guildMemberUpdate', async (oldMember, newMember) => {
     });
 });
 
-
 client.on('guildMemberAdd', (member) => {
     const userId = member.id;
 
