@@ -1,6 +1,6 @@
 /// @proj.slash : kick.js
 
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionsBitField, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,6 +15,13 @@ module.exports = {
                 .setDescription('The reason for kicking the user')
                 .setRequired(false)),
     async execute(interaction) {
+        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+            return interaction.reply({
+                content: 'You do not have permission to use this command.',
+                ephemeral: true,
+            });
+        }
+
         const user = interaction.options.getUser('target');
         const reason = interaction.options.getString('reason') || 'No reason provided';
         if (user) {
