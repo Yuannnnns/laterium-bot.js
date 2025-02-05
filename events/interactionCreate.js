@@ -43,7 +43,7 @@ module.exports = {
             }
         }
 
-        else if (interaction.isSelectMenu()) {
+        else if (interaction.isStringSelectMenu()) {
             const selectMenu = client.selectMenus.get(interaction.customId);
 
             if (!selectMenu) {
