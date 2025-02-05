@@ -1,7 +1,7 @@
 /// @proj : app.js
  
 require('dotenv').config();
-const { client, Collection } = require('discord.js');
+const { Client, Collection } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const connection = require('./mysql');
