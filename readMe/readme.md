@@ -1,4 +1,4 @@
-# Laterium Tools
+# Laterium Node.js
 
 This repository is a Discord bot repository created with the Node.js Runtime which has two languages ​​and language supersets, namely JavaScript and TypeScript from NPM..
 
