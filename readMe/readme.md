@@ -6,7 +6,7 @@ This repository is a Discord bot repository created with the Node.js Runtime whi
 
 ### Windows
 
-0. Download the Repo laterium.node.js or clone with git: `$ git clone https://github.com/Yuannnnns/laterium-node.js`
+0. Download the Repo **laterium.node.js** or clone with git: `$ git clone https://github.com/Yuannnnns/laterium-node.js`
 1. Rename ".env.example" to .env and rename "config.example" to "config.json"
 2. Set the contents of these two files, you need the Bot Token Application Bot ID and MySQL Host User Pass and DB name.. for config.json you can adjust it according to the structure in json
 3. You need import SQL "data-base.sql" from "data-base" to MySQL Platform, you can also use XAMPP as Localhost Platform for MySQL
