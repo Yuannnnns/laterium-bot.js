@@ -1,7 +1,7 @@
 /// @proj : app.js
  
 require('dotenv').config();
-const { app, Collection } = require('discord.js');
+const { client, Collection } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const connection = require('./mysql');
@@ -141,9 +141,9 @@ for (const file of sampQueryFiles) {
     console.log(`(js) Loaded samp-query file: ${file}` .yellow);
 }
 
-lient.on('interactionCreate', async (interaction) => {
+app.on('interactionCreate', async (interaction) => {
     if (interaction.isChatInputCommand()) {
-        const command = client.commands.get(interaction.commandName);
+        const command = app.commands.get(interaction.commandName);
 
         if (!command) return;
 
@@ -157,23 +157,23 @@ lient.on('interactionCreate', async (interaction) => {
 });
 
 /// @system : Character Menu
-client.on('interactionCreate', async (interaction) => {
+app.on('interactionCreate', async (interaction) => {
     if (!interaction.isStringSelectMenu()) return;
 
     if (interaction.customId === 'character_menu') {
-        const choice = interaction.values[0];
+        const c_inter = interaction.values[0];
 
-        if (choice === 'new_ucp') {
+        if (c_inter === 'new_ucp') {
             await interaction.reply({ content: 'You selected **New UCP**.', ephemeral: true });
-        } else if (choice === 'new_ucp_code') {
+        } else if (c_inter === 'new_ucp_code') {
             await interaction.reply({ content: 'You selected **New UCP Code**.', ephemeral: true });
-        } else if (choice === 'new_password') {
+        } else if (c_inter === 'new_password') {
             await interaction.reply({ content: 'You selected **New Password**.', ephemeral: true });
-        } else if (choice === 'delete_character') {
+        } else if (c_inter === 'delete_character') {
             await interaction.reply({ content: 'You selected **Delete Character**.', ephemeral: true });
         }
 
-        console.log(`[LOG] ${interaction.user.tag} selected ${choice} in #${interaction.channel.name}`);
+        console.log(`[LOG INTER] ${interaction.user.tag} selected ${c_inter} in #${interaction.channel.name}`);
     }
 });
 
