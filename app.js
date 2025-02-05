@@ -197,7 +197,7 @@ client.on('messageCreate', message => {
 });
 
 if (!token) {
-    console.error('TOKEN is not defined in the environment variables.');
+    console.error('TOKEN is not defined in the environment variables.' .red);
     process.exit(1);
 }
 
