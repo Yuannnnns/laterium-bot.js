@@ -176,19 +176,17 @@ app.on('guildMemberAdd', async (member) => {
 });
 
 /// @system : Block Messages
-const getBlockedChannels = () => {
-  return new Promise((resolve, reject) => {
+function getBlockedChannels(callback) {
     connection.query('SELECT channel_id FROM blocked_channels', (err, results) => {
-      if (err) {
-        console.error('Error fetching blocked channels:', err);
-        reject(err);
-      } else {
-        const blockedChannels = results.map(row => row.channel_id);
-        resolve(blockedChannels);
-      }
+        if (err) {
+            console.error('Error fetching blocked channels:', err);
+            callback([]);
+        } else {
+            const blockedChannels = results.map(row => row.channel_id);
+            callback(blockedChannels);
+        }
     });
-  });
-};
+}
 
 app.on('messageCreate', message => {
     getBlockedChannels((blockedChannelsWregex) => {
