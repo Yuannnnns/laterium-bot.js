@@ -1,5 +1,5 @@
 /// @proj : app.js
- 
+
 require('dotenv').config();
 const { Client, Collection } = require('discord.js');
 const fs = require('fs');
@@ -90,19 +90,13 @@ app.on('guildMemberAdd', (member) => {
 const token = process.env.TOKEN;
 const config = require('./config.json');
 
-app.commands = new Collection();
-
-const commandsPath = path.join(__dirname, 'slash-commands'); // @path : slash-commands
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
-    app.commands.set(command.data.name, command);
-}
-
 const eventsPath = path.join(__dirname, 'events'); // @path : events
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+app.commands = new Collection();
+app.buttons = new Collection();
+app.selectMenus = new Collection();
+app.modals = new Collection
 
 for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file);
@@ -112,6 +106,15 @@ for (const file of eventFiles) {
     } else {
         app.on(event.name, (...args) => event.execute(...args, app));
     }
+}
+
+const commandsPath = path.join(__dirname, 'slash-commands'); // @path : slash-commands
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
+    app.commands.set(command.data.name, command);
 }
 
 const mysqlPath = path.join(__dirname, 'mysql'); // @path : mysql
