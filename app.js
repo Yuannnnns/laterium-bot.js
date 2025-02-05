@@ -157,6 +157,8 @@ client.on('guildMemberAdd', async (member) => {
     }
 });
 
+/// @system : Block Messages
+
 function getBlockedChannels(callback) {
     connection.query('SELECT channel_id FROM blocked_channels', (err, results) => {
         if (err) {
@@ -168,8 +170,6 @@ function getBlockedChannels(callback) {
         }
     });
 }
-
-/// @system : Block Messages
 client.on('messageCreate', message => {
     getBlockedChannels((blockedChannelsWregex) => {
         const containsBadWord = config.badWords.some(word => message.content.toLowerCase().includes(word));
