@@ -16,6 +16,8 @@ module.exports = {
                 .setDescription('Server port (optional, default: 7777)')
                 .setRequired(false)),
     async execute(interaction) {
+        await interaction.deferReply({ ephemeral: true });
+
         const ip = interaction.options.getString('ip');
         const port = interaction.options.getInteger('port') || 7777;
 
@@ -23,7 +25,7 @@ module.exports = {
 
         samp(serverOptions, async (error, response) => {
             if (error) {
-                await interaction.reply({ content: `❌ Server **${ip}:${port}** is offline or unreachable.`, ephemeral: true });
+                await interaction.editReply({ content: `❌ Server **${ip}:${port}** is offline or unreachable.`, ephemeral: true });
             } else {
                 const statusEmbed = new EmbedBuilder()
                     .setColor(0x0099FF)
@@ -37,8 +39,9 @@ module.exports = {
                     )
                     .setTimestamp();
                 
-                await interaction.reply({ embeds: [statusEmbed] });
+                await interaction.editReply({ embeds: [statusEmbed], ephemeral: true });
             }
         });
     },
 };
+
