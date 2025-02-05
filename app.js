@@ -155,15 +155,13 @@ for (const file of interactionFiles) {
     console.log(`(js) Loaded interaction file: ${file}` .yellow);
 }
 
-module.exports = (client) => {
-    client.on('interactionCreate', async (interaction) => {
-        for (const file of interactionFiles) {
-            const filePath = path.join(interactionPath, file);
-            const interactionHandler = require(filePath);
-            await interactionHandler(interaction);
-        }
-    });
-};
+app.on('interactionCreate', async (interaction) => {
+    for (const file of interactionFiles) {
+        const filePath = path.join(interactionPath, file);
+        const interactionHandler = require(filePath);
+        await interactionHandler(interaction);
+    }
+});
 
 /// @System : Timeout New Member's
 const TIMEOUT_DURATION = 8 * 60 * 1000; // 8-minutes
