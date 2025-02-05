@@ -18,7 +18,7 @@ USE test;
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test`
+-- Database: `laterium`
 --
 
 -- --------------------------------------------------------
