@@ -1,7 +1,7 @@
 /// @proj : app.js
  
 require('dotenv').config();
-const { Client, Collection } = require('discord.js');
+const { app, Collection } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const connection = require('./mysql');
@@ -14,7 +14,7 @@ const { Erine, GatewayIntentBits } = require("erine");
 
 const _prefix = process.env.PREFIX || '!';
 
-const client = new Erine({
+const app = new Erine({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
@@ -24,10 +24,10 @@ const client = new Erine({
     prefix: _prefix
 });
 
-module.exports = client;
+module.exports = app;
 
 /// @System : Auto Save Role
-client.on('guildMemberUpdate', async (oldMember, newMember) => {
+app.on('guildMemberUpdate', async (oldMember, newMember) => {
     if (!oldMember) {
         try {
             oldMember = await newMember.guild.members.fetch(newMember.id);
@@ -69,7 +69,7 @@ client.on('guildMemberUpdate', async (oldMember, newMember) => {
     });
 });
 
-client.on('guildMemberAdd', (member) => {
+app.on('guildMemberAdd', (member) => {
     const userId = member.id;
 
     const query = 'SELECT role_id FROM user_roles WHERE user_id = ?';
@@ -90,7 +90,7 @@ client.on('guildMemberAdd', (member) => {
 const token = process.env.TOKEN;
 const config = require('./config.json');
 
-client.commands = new Collection();
+app.commands = new Collection();
 
 const commandsPath = path.join(__dirname, 'slash-commands'); // @path : slash-commands
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -98,7 +98,7 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
     const command = require(filePath);
-    client.commands.set(command.data.name, command);
+    app.commands.set(command.data.name, command);
 }
 
 const eventsPath = path.join(__dirname, 'events'); // @path : events
@@ -108,9 +108,9 @@ for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file);
     const event = require(filePath);
     if (event.once) {
-        client.once(event.name, (...args) => event.execute(...args, client));
+        app.once(event.name, (...args) => event.execute(...args, app));
     } else {
-        client.on(event.name, (...args) => event.execute(...args, client));
+        app.on(event.name, (...args) => event.execute(...args, app));
     }
 }
 
@@ -141,14 +141,14 @@ for (const file of sampQueryFiles) {
     console.log(`(js) Loaded samp-query file: ${file}` .yellow);
 }
 
-client.once('ready', () => {
-    console.log(`(js) Logged in as ${client.user.tag}` .yellow);
+app.once('ready', () => {
+    console.log(`(js) Logged in as ${app.user.tag}` .yellow);
 });
 
 /// @System : Timeout New Member's
 const TIMEOUT_DURATION = 8 * 60 * 1000; // 8-minutes
 
-client.on('guildMemberAdd', async (member) => {
+app.on('guildMemberAdd', async (member) => {
     try {
         await member.timeout(TIMEOUT_DURATION, 'New member timeout');
         console.log(`Member ${member.user.tag} has been timed out for 8 minutes.`);
@@ -170,7 +170,7 @@ function getBlockedChannels(callback) {
     });
 }
 
-client.on('messageCreate', message => {
+app.on('messageCreate', message => {
     getBlockedChannels((blockedChannelsWregex) => {
         const containsBadWord = config.badWords.some(word => message.content.toLowerCase().includes(word));
 
@@ -201,4 +201,4 @@ if (!token) {
     process.exit(1);
 }
 
-client.login(token);
+app.login(token);
