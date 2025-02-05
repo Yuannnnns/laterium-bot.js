@@ -1,3 +1,5 @@
+/// @proj.slash : samp-server.js
+
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const samp = require('samp-query');
 
