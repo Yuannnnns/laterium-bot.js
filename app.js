@@ -141,21 +141,6 @@ for (const file of sampQueryFiles) {
     console.log(`(js) Loaded samp-query file: ${file}` .yellow);
 }
 
-app.on('interactionCreate', async (interaction) => {
-    if (interaction.isChatInputCommand()) {
-        const command = app.commands.get(interaction.commandName);
-
-        if (!command) return;
-
-        try {
-            await command.execute(interaction);
-        } catch (error) {
-            console.error(error);
-            await interaction.reply({ content: 'An error occurred while executing the command!', ephemeral: true });
-        }
-    }
-});
-
 /// @system : Character Menu
 app.on('interactionCreate', async (interaction) => {
     if (!interaction.isStringSelectMenu()) return;
