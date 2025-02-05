@@ -141,8 +141,40 @@ for (const file of sampQueryFiles) {
     console.log(`(js) Loaded samp-query file: ${file}` .yellow);
 }
 
-app.once('ready', () => {
-    console.log(`(js) Logged in as ${app.user.tag}` .yellow);
+lient.on('interactionCreate', async (interaction) => {
+    if (interaction.isChatInputCommand()) {
+        const command = client.commands.get(interaction.commandName);
+
+        if (!command) return;
+
+        try {
+            await command.execute(interaction);
+        } catch (error) {
+            console.error(error);
+            await interaction.reply({ content: 'An error occurred while executing the command!', ephemeral: true });
+        }
+    }
+});
+
+/// @system : Character Menu
+client.on('interactionCreate', async (interaction) => {
+    if (!interaction.isStringSelectMenu()) return;
+
+    if (interaction.customId === 'character_menu') {
+        const choice = interaction.values[0];
+
+        if (choice === 'new_ucp') {
+            await interaction.reply({ content: 'You selected **New UCP**.', ephemeral: true });
+        } else if (choice === 'new_ucp_code') {
+            await interaction.reply({ content: 'You selected **New UCP Code**.', ephemeral: true });
+        } else if (choice === 'new_password') {
+            await interaction.reply({ content: 'You selected **New Password**.', ephemeral: true });
+        } else if (choice === 'delete_character') {
+            await interaction.reply({ content: 'You selected **Delete Character**.', ephemeral: true });
+        }
+
+        console.log(`[LOG] ${interaction.user.tag} selected ${choice} in #${interaction.channel.name}`);
+    }
 });
 
 /// @System : Timeout New Member's
@@ -194,6 +226,10 @@ app.on('messageCreate', message => {
         const args = message.content.slice(_prefix.length).split(/ +/);
         const command = args.shift().toLowerCase();
     });
+});
+
+app.once('ready', () => {
+    console.log(`(js) Logged in as ${app.user.tag}` .yellow);
 });
 
 if (!token) {
