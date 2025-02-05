@@ -26,7 +26,7 @@ const client = new Erine({
 
 module.exports = client;
 
-/// @summary System Auto Save Role Discord
+/// @System : Auto Save Role
 client.on('guildMemberUpdate', async (oldMember, newMember) => {
     if (!oldMember) {
         try {
@@ -145,7 +145,7 @@ client.once('ready', () => {
     console.log(`(js) Logged in as ${client.user.tag}` .yellow);
 });
 
-/// @summary System Auto-Timeout for new member's
+/// @System : Timeout New Member's
 const TIMEOUT_DURATION = 8 * 60 * 1000; // 8-minutes
 
 client.on('guildMemberAdd', async (member) => {
@@ -169,6 +169,7 @@ function getBlockedChannels(callback) {
     });
 }
 
+/// @system : Block Messages
 client.on('messageCreate', message => {
     getBlockedChannels((blockedChannelsWregex) => {
         const containsBadWord = config.badWords.some(word => message.content.toLowerCase().includes(word));
