@@ -4,11 +4,11 @@ const mysql = require('mysql2');
 const colors = require('colors');
 
 const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    connectTimeout: 20000
+    host: process.env.SQL_HOST,
+    user: process.env.SQL_USER,
+    password: process.env.SQL_PASSWORD,
+    database: process.env.SQL_NAME,
+    connectTimeout: 20000 // @default
 });
 
 connection.connect((err) => {
