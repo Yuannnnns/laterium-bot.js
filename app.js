@@ -145,8 +145,25 @@ for (const file of sampQueryFiles) {
 }
 
 /// @system : Character Menu
-const interactionHandler = require('./interactionHandler');
-client.on('interactionCreate', interactionHandler);
+const interactionPath = path.join(__dirname, 'interactionHandler'); // @path : interactionHandler
+
+const interactionFiles = fs.readdirSync(interactionPath).filter(file => file.endsWith('.js'));
+
+for (const file of interactionFiles) {
+    const filePath = path.join(interactionPath, file);
+    const interactionModule = require(filePath);
+    console.log(`(js) Loaded interaction file: ${file}` .yellow);
+}
+
+module.exports = (client) => {
+    client.on('interactionCreate', async (interaction) => {
+        for (const file of interactionFiles) {
+            const filePath = path.join(interactionPath, file);
+            const interactionHandler = require(filePath);
+            await interactionHandler(interaction);
+        }
+    });
+};
 
 /// @System : Timeout New Member's
 const TIMEOUT_DURATION = 8 * 60 * 1000; // 8-minutes
