@@ -3,7 +3,7 @@
 module.exports = async (interaction) => {
     if (!interaction.isStringSelectMenu()) return;
 
-    if (interaction.customId === 'character_menu') {
+    if (interaction.customId === '_tests') {
         const c_inter = interaction.values[0];
 
         if (c_inter === 'new_ucp') {
