@@ -78,7 +78,8 @@ COMMIT;
 
 CREATE TABLE `players` ( -- basic players
   `reg_id` int(11) NOT NULL, -- example reg-id
-  `username` varchar(11) NOT NULL -- example user-name
+  `username` varchar(11) NOT NULL, -- example user-name
+  `password` varchar(24) NOT NULL -- example password
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='players';
 COMMIT;
 
