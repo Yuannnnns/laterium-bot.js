@@ -8,10 +8,5 @@
         "blockwords1",
         "blockwords1",
         "blockwords1"
-    ],
-    "blockedChannelsWregex": [
-        "channel1",
-        "channel2",
-        "channel3"
     ]
 }
