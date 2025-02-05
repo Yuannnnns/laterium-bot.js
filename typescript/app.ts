@@ -10,7 +10,7 @@ import { Erine, GatewayIntentBits } from 'erine';
 
 const _prefix = process.env.PREFIX || '!';
 
-const client = new Erine({
+const app = new Erine({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
@@ -19,8 +19,8 @@ const client = new Erine({
     prefix: _prefix
 });
 
-client.once('ready', () => {
-  console.log(`(ts) Logged in as ${client.user?.tag}` .blue);
+app.once('ready', () => {
+  console.log(`(ts) Logged in as ${app.user?.tag}` .blue);
 });
 
 const token = process.env.TOKEN;
@@ -29,4 +29,4 @@ if (!token) {
     process.exit(1);
 }
 
-client.login(token);
+app.login(token);
