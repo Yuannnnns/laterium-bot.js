@@ -96,7 +96,7 @@ const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'
 app.commands = new Collection();
 app.buttons = new Collection();
 app.selectMenus = new Collection();
-app.modals = new Collection
+app.modals = new Collection();
 
 for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file);
