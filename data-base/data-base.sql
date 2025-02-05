@@ -58,8 +58,6 @@ CREATE TABLE blocked_channels (
 );
 
 /****
-/// @lifestar (lrp) basic sql
-
 --
 -- Table structure for table `playerucp`
 --
