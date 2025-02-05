@@ -13,6 +13,7 @@ const _prefix = process.env.PREFIX || '!';
 const app = new Erine({
     intents: [
         GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent
     ],
