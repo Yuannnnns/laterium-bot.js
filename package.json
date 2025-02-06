@@ -15,7 +15,7 @@
     "bot.js",
     "node.js"
   ],
-  "author": "yfors",
+  "author": "Yuan",
   "license": "MIT",
   "dependencies": {
     "discord.js": "^14.17.3",
