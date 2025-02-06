@@ -15,7 +15,7 @@ This repository contains a Discord bot built using Node.js, supporting both Java
 1. **Clone the Repository**  
    Clone the repository to your local machine using Git:
    ```bash
-   git clone https://github.com/Yuannnnns/laterium-node.js.git
+   git clone https://github.com/Yuannnnns/openium-bot
    ```
 
 2. **Set Up Configuration Files**  
@@ -50,7 +50,7 @@ We welcome contributions from the community! To contribute:
 2. **Clone Your Fork**  
    Clone your forked repository to your local machine:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/laterium-node.js.git
+   git clone https://github.com/YOUR_USERNAME/openium-bot
    ```
 
 3. **Create a Branch**  
