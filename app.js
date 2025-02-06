@@ -154,7 +154,7 @@ for (const file of interactionFiles) {
     const interactionModule = require(filePath);
 
     if (interactionModule.customId) {
-        client.selectMenus.set(interactionModule.customId, interactionModule);
+        client.selectMenus.set(interactionModule.customId, interactionModule); // fixed.
         console.log(`(js) Loaded select menu: ${interactionModule.customId}`.yellow);
     } else {
         console.log(`(js) Loaded interaction file: ${file}`.yellow);
@@ -180,7 +180,6 @@ client.on('interactionCreate', async (interaction) => {
             });
         }
     }
-
 });
 
 /// @System : Timeout New Member's
