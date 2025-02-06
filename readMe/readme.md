@@ -1,4 +1,4 @@
-# Laterium Bot
+# OpenIUM Bot
 
 This repository contains a Discord bot built using Node.js, supporting both JavaScript and TypeScript. The bot is designed to be versatile and easy to set up, with configurations managed through environment variables and JSON files.
 
