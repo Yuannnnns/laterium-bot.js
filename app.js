@@ -152,15 +152,35 @@ const interactionFiles = fs.readdirSync(interactionPath).filter(file => file.end
 for (const file of interactionFiles) {
     const filePath = path.join(interactionPath, file);
     const interactionModule = require(filePath);
-    console.log(`(js) Loaded interaction file: ${file}` .yellow);
+
+    if (interactionModule.customId) {
+        client.selectMenus.set(interactionModule.customId, interactionModule);
+        console.log(`(js) Loaded select menu: ${interactionModule.customId}`.yellow);
+    } else {
+        console.log(`(js) Loaded interaction file: ${file}`.yellow);
+    }
 }
 
-app.on('interactionCreate', async (interaction) => {
-    for (const file of interactionFiles) {
-        const filePath = path.join(interactionPath, file);
-        const interactionHandler = require(filePath);
-        await interactionHandler(interaction);
+client.on('interactionCreate', async (interaction) => {
+    if (interaction.isStringSelectMenu()) {
+        const selectMenu = client.selectMenus.get(interaction.customId);
+
+        if (!selectMenu) {
+            console.error(`Select menu ${interaction.customId} not found.`);
+            return;
+        }
+
+        try {
+            await selectMenu.execute(interaction, client);
+        } catch (error) {
+            console.error(`Error executing select menu ${interaction.customId}:`, error);
+            await interaction.reply({
+                content: 'There was an error while handling this select menu!',
+                ephemeral: true,
+            });
+        }
     }
+
 });
 
 /// @System : Timeout New Member's
