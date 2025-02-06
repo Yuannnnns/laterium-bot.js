@@ -57,32 +57,6 @@ CREATE TABLE blocked_channels (
     UNIQUE KEY unique_channel (guild_id, channel_id)
 );
 
-/****
---
--- Table structure for table `playerucp`
---
-
-CREATE TABLE `playerucp` ( -- basic playerucp
-  `id` int(11) NOT NULL, -- example user-id
-  `ucp` varchar(11) NOT NULL, -- example user-ucp
-  `verifycode` varchar(11) NOT NULL, -- example verifycode
-  `DiscordID` BIGINT NOT NULL -- example Discord ID
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='playerucp';
-COMMIT;
-
---
--- Table structure for table `players`
---
-
-CREATE TABLE `players` ( -- basic players
-  `reg_id` int(11) NOT NULL, -- example reg-id
-  `username` varchar(11) NOT NULL, -- example user-name
-  `password` varchar(24) NOT NULL -- example password
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci COMMENT='players';
-COMMIT;
-
-****/
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
