@@ -46,10 +46,10 @@ module.exports = {
         else if (interaction.isStringSelectMenu()) {
             const selectMenu = client.selectMenus.get(interaction.customId);
 
-            //if (!selectMenu) {
-            //    console.error(`Select menu ${interaction.customId} not found.`);
-            //    return;
-            //}
+            if (!selectMenu) {
+                console.error(`Select menu ${interaction.customId} not found.`);
+                return;
+            }
 
             try {
                 await selectMenu.execute(interaction, client);
